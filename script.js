@@ -5,21 +5,40 @@ var button = document.getElementById("enter");
 var input = document.getElementById("userInput");
 var ul = document.querySelector("ul");
 
-button.addEventListener("click", function(){
-    if (input.value.length > 0) {
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(input.value));
-        ul.appendChild(li);
-        input.value = "";
-    } 
-});
 
-input.addEventListener("keypress", function (event) {
-    // console.log(event.which);
-    if (input.value.length > 0 && event.keyCode === 13) {
-        var li = document.createElement("li");
-        li.appendChild(document.createTextNode(input.value));
-        ul.appendChild(li);
-        input.value = "";
+function isInputLengthGreaterThanZero()
+{
+    return input.value.length > 0;
+}
+
+
+function createListElement()
+{
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(input.value));
+    ul.appendChild(li);
+    input.value = "";
+}
+
+
+function addListAfterClick()
+{
+    if (isInputLengthGreaterThanZero()) {
+        createListElement();
     }
-});
+}
+
+
+function addListAfterKeypress(event)
+{
+    // console.log(event.which);
+    if (isInputLengthGreaterThanZero() && event.keyCode === 13) {
+        createListElement();
+    }
+}
+
+
+button.addEventListener("click", addListAfterClick);
+
+
+input.addEventListener("keypress", addListAfterKeypress);
