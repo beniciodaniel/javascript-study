@@ -4,10 +4,10 @@
 var button = document.getElementById("enter");
 var input = document.getElementById("userInput");
 var ul = document.querySelector("ul");
+// var items = ul.getElementsByTagName("li");
 var deleteButtons = document.getElementsByClassName("delete");
-var items = ul.getElementsByTagName("li");
 
-// console.log(items);
+console.log(ul.children);
 
 
 function isInputLengthGreaterThanZero()
@@ -19,9 +19,17 @@ function isInputLengthGreaterThanZero()
 function createListElement()
 {
     var li = document.createElement("li");
+    var deleteButton = document.createElement("button");
+    // deleteButton.classList.add("Delete");
+    deleteButton.setAttribute("class", "delete");
+    deleteButton.innerHTML = "Delete";
+    
     li.appendChild(document.createTextNode(input.value));
+    li.appendChild(deleteButton);
     ul.appendChild(li);
+
     input.value = "";
+    console.log(deleteButtons);
 }
 
 
@@ -41,17 +49,26 @@ function addListAfterKeypress(event)
     }
 }
 
-button.addEventListener("click", addListAfterClick);
-
-input.addEventListener("keypress", addListAfterKeypress);
 
 ul.addEventListener("click", function(event){
     var item = event.target;
-    item.classList.toggle("done");
+    
+    if(item.tagName === "LI"){
+        item.classList.toggle("done");
+    } else if (item.tagName === "BUTTON" && item.classList.contains("delete")){
+        console.log(item.classList.contains("delete"));
+        item.parentNode.remove();
+    };
 });
 
-for (let i = 0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener("click", function(event){
-        event.target.parentNode.remove();
-    });
-}
+
+// for (let i = 0; i < deleteButtons.length; i++) {
+//     deleteButtons[i].addEventListener("click", function(event){
+//         event.target.parentNode.remove();
+//     });
+// }
+
+
+button.addEventListener("click", addListAfterClick);
+
+input.addEventListener("keypress", addListAfterKeypress);
