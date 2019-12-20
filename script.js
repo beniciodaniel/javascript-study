@@ -5,6 +5,8 @@ var button = document.getElementById("enter");
 var input = document.getElementById("userInput");
 var ul = document.querySelector("ul");
 
+// console.log(ul);
+
 
 function isInputLengthGreaterThanZero()
 {
@@ -37,8 +39,15 @@ function addListAfterKeypress(event)
     }
 }
 
-
 button.addEventListener("click", addListAfterClick);
 
-
 input.addEventListener("keypress", addListAfterKeypress);
+
+ul.addEventListener("click", function(event){
+    var item = event.target;
+    if (item.classList.contains("done")){
+        item.classList.remove("done");
+    } else {
+        item.classList.add("done");  
+    }
+});
