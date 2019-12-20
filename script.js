@@ -4,8 +4,10 @@
 var button = document.getElementById("enter");
 var input = document.getElementById("userInput");
 var ul = document.querySelector("ul");
+var deleteButtons = document.getElementsByClassName("delete");
+var items = ul.getElementsByTagName("li");
 
-// console.log(ul);
+// console.log(items);
 
 
 function isInputLengthGreaterThanZero()
@@ -45,9 +47,11 @@ input.addEventListener("keypress", addListAfterKeypress);
 
 ul.addEventListener("click", function(event){
     var item = event.target;
-    if (item.classList.contains("done")){
-        item.classList.remove("done");
-    } else {
-        item.classList.add("done");  
-    }
+    item.classList.toggle("done");
 });
+
+for (let i = 0; i < deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener("click", function(event){
+        event.target.parentNode.remove();
+    });
+}
