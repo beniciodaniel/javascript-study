@@ -50,16 +50,21 @@ function addListAfterKeypress(event)
 }
 
 
-ul.addEventListener("click", function(event){
+function addLineThroughAfterClick(event) {
     var item = event.target;
-    
-    if(item.tagName === "LI"){
+    if (item.tagName === "LI") {
         item.classList.toggle("done");
-    } else if (item.tagName === "BUTTON" && item.classList.contains("delete")){
+    }
+}
+
+
+function deleteNewButtonsAfterClick(event) {
+    var item = event.target;
+    if (item.tagName === "BUTTON" && item.classList.contains("delete")) {
         console.log(item.classList.contains("delete"));
         item.parentNode.remove();
     };
-});
+}
 
 
 // for (let i = 0; i < deleteButtons.length; i++) {
@@ -72,3 +77,7 @@ ul.addEventListener("click", function(event){
 button.addEventListener("click", addListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);
+
+ul.addEventListener("click", addLineThroughAfterClick);
+
+ul.addEventListener("click", deleteNewButtonsAfterClick);
